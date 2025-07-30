@@ -9,19 +9,26 @@ const socket = new WebSocket(wsUrl);
 
 // SENDING DATA TO EEL
 
-async function savecustomer() {
+function cancelCustomerEdit(){
+  $('#customerEditDOM').hide();
+  $('#customerRecordsDOM').show();
+  $('#customerForm')[0].reset();
+}
+
+async function saveCustomer() {
   let name = $("#name").val();
   let email = $("#email").val();
   let phone = $("#phone").val();
   let product = $("#product").val();
   let processor = $("#processor").val();
+  let customerID = $("#customerID").val();
 
   phone = parseInt(phone);
 
   if (!name) {
     alert("Name should not be Blank ");
     return;
-  }
+  } 
   if (!email) {
     alert("Email should not be Blank ");
     return;
@@ -38,39 +45,42 @@ async function savecustomer() {
     alert("Please select processor!  ");
     return;
   }
-  alert("Submited Successfully")
 
   formData = {
-    name: name,
-    email: email,
-    phone: phone,
-    product: product,
-    processor: processor,
+    "name": name,
+    "email": email,
+    "phone": phone,
+    "product": product,
+    "processor": processor,
+    "customerID": customerID,
   };
   console.log(formData);
+  if(customerID)//if customerID=true
+    {
+    let result = await eel.update_customer(formData)(); 
+    $('#customerEditDOM').hide();
+    $('#customerRecordsDOM').show();
+    updateCustomerTableRowById(result.lastest_customer_data)
+  }else{
+    let result = await eel.insert_customer(formData)(); 
+    console.log(result); 
+  }
+  $('#customerForm')[0].reset();
+  alert("Submited Successfully");
+}
 
-  let result = await eel.savecustomer(formData)();
-  console.log(result);
+function updateCustomerTableRowById(lastest_customer_data){
+  let tdsHtml = genrateCustomerTDs(lastest_customer_data);
+  console.log(tdsHtml);
+  $('#'+lastest_customer_data.id).html(tdsHtml);
 }
 
 // -------------------------------------------------------------------------------------------------
 // RETRIEVING DATA FROM EEL
 
-var formData = {};
-//#day 4th 16thJuly25
-async function get_list_of_all_customer() {
-  let result = await eel.get_list_of_all_customer()();
-  //$("#result_span").html(JSON.stringify(result));
-  // render js object(can be map of lsit of var/map) on html
-  $("#customerGridTableTbody").html("");
-  for (let index in result) {
-    let data = result[index];
-    let trHtml = genrateCustomerTableRowHtmlFromMap(data);
-    $("#customerGridTableTbody").append(trHtml);
-  }
-}
+
 async function get_student() {
-  let result = await eel.get_stu_info()();
+  let result = await eel.get_all_students()();
   //$("#result_span").html(JSON.stringify(result));
   // render js object(can be map of lsit of var/map) on html
   $("#studentGridTableTbody").html("");
@@ -85,25 +95,47 @@ async function get_student() {
 
 // --------------------------------------------------------------------------------------------------------
 // SHOWING DATA ON WEBSITE
+var formData = {};
+//#day 4th 16thJuly25
+async function get_list_of_all_customer() {
+  let result = await eel.get_list_of_all_customer()();
+  //$("#result_span").html(JSON.stringify(result));
+  // render js object(can be map of lsit of var/map) on html
+  $("#customerGridTableTbody").html(""); // render new html[elements] inside DOM and delete Existing
+  for (let index in result) {
+    let data = result[index];
+    let trHtml = genrateCustomerTableRowHtmlFromMap(data);
+    $("#customerGridTableTbody").append(trHtml); // add new one or more element inside DOM
+  }
+}
 
-function genrateCustomerTableRowHtmlFromMap(data) {
-  console.log(data.id);
-  console.log(data["name"]);
-
-  tr=[];
-  tr.push(`<tr id="${data.id}" class="cursor" onclick ="editCustomerRow(this)" ><td>`);
+function genrateCustomerTDs(data) {
+  let tr=[];
+  tr.push('<td>');
   tr.push(data.created_on);
   tr.push('</td><td>');
   tr.push(data.name);
   tr.push('</td><td>');
   tr.push(data.email);
-  tr.push('</td><td>');
+  tr.push('</td><td style="text-align:right;">');
   tr.push(data.phone);
   tr.push('</td><td>');
   tr.push(data.product);
   tr.push('</td><td>')
-  tr.push(data.processor)
-  tr.push('</td><td></tr>')
+  tr.push(data.processor);
+  tr.push('</td><td><button type="button" onclick ="editCustomerRow(this)">Edit</button>')
+  tr.push('</td><td><button type="button" onclick ="deleteCustomerRow(this)">Delete</button>')
+  tr.push('</td>')
+  return tr.join('');
+}
+
+function genrateCustomerTableRowHtmlFromMap(data) {
+  console.log(data.id);
+  console.log(data["name"]); 
+  let tr=[];
+  tr.push(`<tr id="${data.id}" class="cursor" data-name="${data.name}">`);
+  tr.push(genrateCustomerTDs(data))
+  tr.push('</tr>')
   return tr.join('')
   
 
@@ -130,8 +162,7 @@ function genrateCustomerTableRowHtmlFromMap(data) {
 
 
 function genratestudentTableRowHtmlFromMap(data) {
-  console.log(data.id);
-  console.log(data["name"]);
+  console.log(data);
   return (
     '<tr id="' +
     data.id +
@@ -140,13 +171,28 @@ function genratestudentTableRowHtmlFromMap(data) {
     "</td><td>" +
     data.name +
     "</td><td>" +
-    data.class +
+    data.dob +
     "</td><td>" +
-    data.section +
+    data.age +
     "</td><td>" +
-    data.roll_no +
+    data.class_val +
+    "</td><td>" +
+    "<button class='btn btn-success' onclick=update_loadToggle()>edit</button>" +
+    "</td><td>" +
+    "<button class='btn btn-danger' onclick=deleteStudent_data()>delete</button>" +
     "</td></tr>"
   );
+}
+
+function update_loadToggle(){
+  $('#update_studentForm').show();
+  $('#insert_studentForm').hide();
+
+   
+}
+
+function deleteStudent_data(){
+
 }
 // <tr id="1">
 //   <td>23 july</td>
@@ -160,16 +206,102 @@ function genratestudentTableRowHtmlFromMap(data) {
 // ---------------------------------------------------------------------------------------------
 // EDITING CUSTOMERS GRID DATA
 function editCustomerRow(element) {
-  console.log(element);
-  console.log(element.id);
-  console.log(element.dataset);
-  window.location.href = "/customerEntry.html?rowId=" + element.id;
+  // here element is an button[edit]
+  //element.parentNode is an TD
+  //element.parentNode.parentNode is an TD's parentNode TR
+  console.log(element.parentNode.parentNode.id);  
+  $('#customerEditDOM').show();
+  $('#customerRecordsDOM').hide();
+  let dbRowId = element.parentNode.parentNode.id;
+  getCustomerByID(dbRowId);
+  // window.location.href = "/customerEntry.html?rowId=" + element.id;
 }
- async function getCustomerByID(id) {
-  
-  $('#customerID').val(id);
-  data = await eel.get_customer_by_id(id)();
-  $("#name").val(data.name);
-  console.log(`"hello ${data.id}"`)
 
+
+ async function getCustomerByID(dbRowId) {
+   
+  data = await eel.get_customer_by_id(dbRowId)();
+  console.log(data)
+  if(data.id){
+    $("#customerID").val(data.id);
+    $("#name").val(data.name);
+    $("#email").val(data.email);
+    $("#phone").val(data.phone);
+    $("#product").val(data.product);
+    $("#processor").val(data.processor);
+  }else{ 
+    $('#customerEditDOM').hide();
+    $('#customerRecordsDOM').show();
+    alert("Customer Not Found, Please refresh your page!")
+  }
+  //if(var) false hoga whenver: "",0,false
+ 
+
+}
+
+
+async function deleteCustomerRow(elm){
+  // here elm is an button[Delete]
+  //elm.parentNode is an TD
+  //elm.parentNode.parentNode is an TD's parentNode TR
+  let dbRowIdToDelete = elm.parentNode.parentNode.id,
+  customerName = elm.parentNode.parentNode.dataset.name; //JS
+  console.log(elm.parentNode.parentNode.id); 
+  console.log(elm.parentNode.parentNode.dataset); 
+  if(!dbRowIdToDelete){
+    return;
+  }
+  if(confirm(`Are you sure to delete ${customerName}?`)){
+    console.log("Going for deletion");
+    let result = await eel.delete_customer_by_id(dbRowIdToDelete)();
+    console.log(result)
+    if(result['isDeleted']){
+      // $('#elemetID').remove();
+      $(`#${dbRowIdToDelete}`).remove(); // Jquery delete element by id
+      /*
+      js delete element by id
+      //step1 
+      const elementToRemove = document.getElementById('myElement');
+      if (elementToRemove) { //step2 start 
+        elementToRemove.remove(); //step3
+      }//step2 end
+      */
+      alert(`${customerName} deleted Successfully!`)
+    }
+  }else{
+    console.log("You pressed cancel!") 
+  }
+
+}
+
+
+async function createStudent(){
+  let name = $('#name').val(),
+  dob = $('#dob').val(),
+  classVal =$('#class').val();
+
+   if( !name){
+      alert("enter name !")
+      return;
+   }
+
+   if( !dob){
+      alert("enter DOB! ")
+      return;
+   }
+
+   if( !classVal){
+      alert("Select class! ");
+      return;
+   }
+   
+   formData = {
+    "name": name, 
+    "dob": dob,
+    "class": classVal,
+    "studentID": '', 
+  };
+  console.log(formData);
+   let result = await eel.insert_student(formData)();
+   console.log(result);
 }

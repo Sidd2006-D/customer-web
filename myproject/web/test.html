@@ -1,11 +1,12 @@
 <html>
 
 <head>
-  <title>+ Customer</title>
+  <title>Jquery Exercise</title>
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <script src="js/jq1.11.3.js"></script>
   <script src="js/logix.js"></script>
+  <script src="js/jqueryExercise.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="eel.js"></script>
 </head>
@@ -32,15 +33,15 @@
           <li ><a href="home.html">Home <span class="sr-only"></span></a></li> 
           <li ><a href="customerEntry.html">+ Customer <span class="sr-only"></span></a></li> 
           <li><a href="#">Link</a></li>
-          <li class="dropdown">
+          <li class="active dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false">Grid <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li class="active"><a href="customerGrid.html">Customer Grid</a></li>
+              <li ><a href="customerGrid.html">Customer Grid</a></li>
               <li><a href="orderGrid.html">Order Grid</a></li>
               <li role="separator" class="divider"></li>
-               <li><a href="studentEntry.html">+ Student</a></li>
-<li><a href="student_grid.html">Student Grid</a></li>
+              <li><a href="studentEntry.html">+ Student</a></li>
+<li class="active"><a href="student_grid.html">Student Grid</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="jqueryExercise.html">Jquery Exercise</a></li>
               <li><a href="test.html">TODO1</a></li>
@@ -74,82 +75,26 @@
     </div><!-- /.container-fluid -->
   </nav>
     <div class="container">
-  <div class="panel" id="customerEditDOM" style="display: none;">
-    
-    <h2>Edit Customer Information Form</h2>
-    <form class="container" id="customerForm">
-      <input type="hidden" name="customerID" id="customerID">
-      <div class="form-group">
-        <div>
-          <label for="name">Name:</label><br>
-          <input type="text" id="name" name="name" class="form-control" required>
-        </div>
-        <div>
-          <label for="email">Email:</label><br>
-          <input type="email" id="email" name="email" class="form-control" required>
-        </div>
-        <div>
-          <label for="phone">Phone Number:</label><br>
-          <input type="number" id="phone" name="phone" class="form-control" min="0">
-        </div>
-        <div>
-          <label for="product">Laptop Brand:</label><br>
-          <select class="form-control custom-select" id="product" name="product" required>
-            <option value="" disabled selected>Select a brand</option>
-            <option value="Dell">Dell</option>
-            <option value="HP">HP</option>
-            <option value="Lenovo">Lenovo</option>
-            <option value="Apple">Apple</option>
-            <option value="Asus">Asus</option>
-          </select>
-        </div>
-        <div>
-          <label for="processor">Processor:</label><br>
-          <select class="form-control custom-select" id="processor" name="processor" required>
-            <option value="" disabled selected>Select a processor</option>
-            <option value="i3">Intel Core i3</option>
-            <option value="i5">Intel Core i5</option>
-            <option value="i7">Intel Core i7</option>
-            <option value="i9">Intel Core i9</option>
-            <option value="Ryzen5">AMD Ryzen 5</option>
-            <option value="Ryzen7">AMD Ryzen 7</option>
-          </select>
-        </div>
-
-        <div class="text-right">
-          <button type="button" class="btn btn-default"  onclick="cancelCustomerEdit()">Cancel</button>
-          <button type="button" class="btn btn-success"  onclick="saveCustomer()">Submit</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="panel" id="customerRecordsDOM"> 
+  <div class="panel">
     <div class="panel-heading">
-       <button type="button" class="btn btn-info right" onclick="get_list_of_all_customer()">Load Data</button>
+       <button type="button" class="btn btn-info right" onclick="get_student()">Load Data</button>
     </div> 
     <div class="panel-body">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title"><h3>Customer Records</h3></h5>
-          <span id="result_span"></span>
+          <h5 class="card-title">TODO</h5>
         </div>
       </div>  
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="table1">
           <thead>
             <tr>
-              <th>Created On</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone No#</th>
-              <th>Brand</th>
-              <th>Processor</th> 
-              <th>Edit</th>
-              <th>Delete</th>
+              <th>H1</th>
+              <th>H2</th> 
             </tr>
             
           </thead>
-          <tbody id="customerGridTableTbody">
+          <tbody id="table1Tbody">
 
           </tbody>   
         </table>
@@ -162,4 +107,3 @@
     </p>
 </body>
 </html>
-

@@ -1,11 +1,13 @@
 <html>
 
 <head>
-  <title>Student Grid</title>
+  <title>Jquery Exercise</title>
   <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <script src="js/jq1.11.3.js"></script>
   <script src="js/logix.js"></script>
+  <script src="js/jqueryExercise.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="eel.js"></script>
 </head>
@@ -74,32 +76,90 @@
     </div><!-- /.container-fluid -->
   </nav>
     <div class="container">
-  <div class="panel">
-    <div class="panel-heading">
-       <button type="button" class="btn btn-info right" onclick="get_student()">Load Data</button>
-    </div> 
+  <div class="panel"> 
     <div class="panel-body">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title"><h3>Result</h3></h5>
-          <span id="result_span"></span>
+          <h5 class="card-title">
+            Here we will practive on JS/Jquery/Css
+          </h5>
         </div>
       </div>  
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <button type="button" class="beautibutton" onclick="hideAll()">Hide All</button>
+            <button type="button" class="beautibutton" onclick="showAll()">show  All</button>
+            <button type="button" class="beautibutton" onclick="showD1hideD2()">Show D1 & hide D2</button>
+            <button type="button" class="beautibutton" onclick="hideD1ShowD2()">hide D1 & show D2</button>
+            <button type="button" class="beautibutton" onclick="replaceD1Html()">Replace D1 html with Sample</button>
+            <button type="button" class="beautibutton" onclick="appendD1Html()">Append html into D1</button>
+            <button type="button" class="beautibutton" onclick="prependD1Html()">Prepend html into D1</button>
+            <button type="button" class="beautibutton" onclick="toggleD1andD2()">toggle D1 & D2</button>
+                <button type="button" class="beautibutton" onclick="replaceD2Html()">replaceD2Html with sample</button>
+            </div>
+          </div>
+          <div class="row beautibox">
+            <div id="D1" style="display: none;">
+              <h3>This is D1</h3>
+            </div>
+            <div id="D2" style="display: none;">
+              <h3>This is D2</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-12"> 
+        
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="beautibutton" onclick="testCssWithJQ()">.css JQ</button>
+              <button type="button" class="beautibutton" onclick="howLoopWillWorks()">Loop JQ</button>
+            </div> 
+            <div class="col-12"> 
+              <ol id="orderListTest" style="">
+                <li class="li1">Item 1</li>
+                <li class="li1">Item 2Ab</li>
+                <li class="li2">Item A2</li>
+                <li class="li2">Item B2</li>
+                <li class="li3">Item C3</li> 
+              </ol>
+            </div>
+          </div>    
+      </div>  
+      <div class="row">
+        <div class="col-2">
+          <label>1st Number</label>
+          <input type="number" id="firstN">
+        </div>
+        <div class="col-2">
+          <label>2nd Number</label>
+          <input type="number" id="secondN">
+        </div>
+        <div class="col-2">
+          <label>Result</label>
+          <input type="number" id="resultN">
+        </div>
+        <div class="col-12">
+          <button type="button" onclick="addNumber()">Add(+) Num</button>
+          <button type="button" onclick="addNumber()">Sub(-) Num</button>
+          <button type="button" onclick="addNumber()">Div(/) Num</button>
+          <button type="button" onclick="addNumber()">(*) Num</button>
+        </div>
+      </div>
+
+      
+
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="table1">
           <thead>
             <tr>
-              <th>Date_OF_Entry</th>
-              <th>Name</th>
-              <th>DOB</th>
-              <th>Age</th>
-              <th>Class</th>
-              <th>Edit</th>
-              <th>Delete</th>
+              <th>H1</th>
+              <th>H2</th> 
             </tr>
             
           </thead>
-          <tbody id="studentGridTableTbody">
+          <tbody id="table1Tbody">
 
           </tbody>   
         </table>

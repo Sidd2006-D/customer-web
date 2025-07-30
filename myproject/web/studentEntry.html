@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>+ Customer</title>
+  <title>+ Student</title>
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <script src="js/jq1.11.3.js"></script>
@@ -30,16 +30,16 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="home.html">Home <span class="sr-only"></span></a></li>
-          <li class="active"><a href="customerEntry.html">+ Customer <span class="sr-only"></span></a></li>
+          <li ><a href="customerEntry.html">+ Customer <span class="sr-only"></span></a></li>
           <li><a href="#">Link</a></li>
-          <li class="dropdown">
+          <li class="active" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false">Grid <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="customerGrid.html">Customer Grid</a></li>
               <li><a href="orderGrid.html">Order Grid</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="studentEntry.html">+ Student</a></li>
+              <li class="active"><a href="studentEntry.html">+ Student</a></li> 
 <li><a href="student_grid.html">Student Grid</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="jqueryExercise.html">Jquery Exercise</a></li>
@@ -73,54 +73,72 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <h2>Customer Information Form</h2>
-  <form class="container" id="customerForm">
-    <input type="hidden" value="" name="customerID" id="customerID">
+  
+ <!-- create student -->
+  <form class="container" id="insert_studentForm">
+     <h2>Student Create</h2>
+    <input type="hidden" value="" name="studentID" id="studentID">
     <div class="form-group">
       <div>
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" class="form-control" required>
       </div>
       <div>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" class="form-control" required>
+        <label for="email">DOB:</label><br>
+        <input type="date" id="dob" name="dob" class="form-control" required>
       </div>
       <div>
-        <label for="phone">Phone Number:</label><br>
-        <input type="number" id="phone" name="phone" class="form-control" min="0">
-      </div>
-      <div>
-        <label for="product">Laptop Brand:</label><br>
-        <select class="form-control custom-select" id="product" name="product" required>
-          <option value="" disabled selected>Select a brand</option>
-          <option value="Dell">Dell</option>
-          <option value="HP">HP</option>
-          <option value="Lenovo">Lenovo</option>
-          <option value="Apple">Apple</option>
-          <option value="Asus">Asus</option>
-        </select>
-      </div>
-      <div>
-        <label for="processor">Processor:</label><br>
-        <select class="form-control custom-select" id="processor" name="processor" required>
-          <option value="" disabled selected>Select a processor</option>
-          <option value="i3">Intel Core i3</option>
-          <option value="i5">Intel Core i5</option>
-          <option value="i7">Intel Core i7</option>
-          <option value="i9">Intel Core i9</option>
-          <option value="Ryzen5">AMD Ryzen 5</option>
-          <option value="Ryzen7">AMD Ryzen 7</option>
+        <label for="class">Class:</label><br>
+        <select class="form-control custom-select" id="class" name="class" required>
+          <option value="" selected>-Select-</option>
+          <option value="10th">10th</option>
+          <option value="12th">12th</option>
+          <option value="Graduate">Graduate</option>
+          <option value="Masters">Masters</option>
+          <option value="Phd">Phd</option>
         </select>
       </div>
 
       <div class="text-right">
         <button type="reset" class="btn btn-primary" >Clear</button>
         <button type="button" class="btn btn-success"
-          onclick="saveCustomer()">Submit</button>
+          onclick="createStudent()">Save</button>
       </div>
     </div>
   </form>
 
+  <!-- Update student -->
+  <form  style="display: none;" class="container" id="update_staudentForm">
+    <h2>Student Edit</h2>
+    <input type="hidden" value="" name="studentID" id="studentID">
+    <div class="form-group">
+      <div>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" class="form-control" required>
+      </div>
+      <div>
+        <label for="email">DOB:</label><br>
+        <input type="date" id="dob" name="dob" class="form-control" required>
+      </div>
+      <div>
+        <label for="class">Class:</label><br>
+        <select class="form-control custom-select" id="class" name="class" required>
+          <option value="" selected>-Select-</option>
+          <option value="10th">10th</option>
+          <option value="12th">12th</option>
+          <option value="Graduate">Graduate</option>
+          <option value="Masters">Masters</option>
+          <option value="Phd">Phd</option>
+        </select>
+      </div>
+
+      <div class="text-right">
+        <button type="reset" class="btn btn-primary" >Clear</button>
+        <button type="button" class="btn btn-success"
+          onclick="editStudent()">Update</button>
+      </div>
+    </div>
+  </form>
 
 
 </body>
