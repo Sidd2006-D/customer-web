@@ -49,8 +49,17 @@ def get_student_list_data(engine):
 def get_student_data_by_id(engine, id):
   result={"status": 200, "isDeleted": False}
   print('get_student_data_by_id:',id)
-  #TODO
-  return result
+  get_student_data_by_idQuery=text(f''' select * from student 
+                            where id={id};''')
+  with engine.connect() as conn:
+    data=conn.execute(get_student_data_by_idQuery)
+    print(data)
+    conn.commit()
+    
+  
+  
+  
+  return data
 
 def insert_student_data(engine, data):
   __new_row_id = 0
@@ -89,13 +98,14 @@ def update_student_data_by_id(engine, data):
   # 
   
 def delete_student_data_by_id(engine,id):
+  with engine.connect() as conn:
   
-  result={"status": 200, "isDeleted": False}
-  print('deleting_student_data_by_id:')
-  delete_query=text('delete from student where id=:id;')
-  result=conn.execute(delete_query)
-  conn.commit()
-  __new_row_id = result.lastrowid
-  
+    result={"status": 200, "isDeleted": False}
+    print('deleting_student_data_by_id:')
+    delete_query=text('delete from student where id=:id;')
+    result=conn.execute(delete_query)
+    conn.commit()
+    __new_row_id = result.lastrowid
+    
  
   return result

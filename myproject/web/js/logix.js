@@ -177,22 +177,34 @@ function genratestudentTableRowHtmlFromMap(data) {
     "</td><td>" +
     data.class_val +
     "</td><td>" +
-    "<button class='btn btn-success' onclick=update_loadToggle()>edit</button>" +
+    "<button class='btn btn-success' onclick=showEditStudent(this)>edit</button>" +
     "</td><td>" +
-    "<button class='btn btn-danger' onclick=deleteStudent_data()>delete</button>" +
+    "<button class='btn btn-danger' onclick=deleteStudent_data(this)>delete</button>" +
     "</td></tr>"
   );
 }
 
-function update_loadToggle(){
+function showEditStudent(row){
+ 
+  $('#loaddata').hide();
   $('#update_studentForm').show();
-  $('#insert_studentForm').hide();
-
-   
+  dbrowid=row.parentNode.parentNode.id;
+  get_student_by_id(dbrowid);
 }
 
-function deleteStudent_data(){
+async function get_student_by_id(dbrowid){
+  data = await eel.get_stuData_by_id(dbrowid)();
+  if (data.id){
+    $('studentID').val(data.id)
+    $('name').val(data.name)
+    $('dob').val(data.dob)
+    $('class').val(data.class)
+    
+  }
+}
 
+function deleteStudent_data(id){
+   
 }
 // <tr id="1">
 //   <td>23 july</td>

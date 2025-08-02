@@ -1,6 +1,7 @@
 import eel
 from api_provider.student_crud_api import insert_student_data
 from api_provider.student_crud_api import get_student_list_data
+from api_provider.student_crud_api import  get_student_data_by_id
 from api_provider.student_crud_api import update_student_data_by_id
 from api_provider.student_crud_api import delete_student_data_by_id
 from api_provider.customer_grid_api import inserting_customer_data
@@ -32,6 +33,10 @@ engine = create_engine(mysql_conn_url)
 def get_all_students():
   return get_student_list_data(engine)
 
+@eel.expose
+
+def  get_stuData_by_id(id):
+  return  get_student_data_by_id(engine,id)
 
 @eel.expose
 def update_student():
@@ -48,11 +53,13 @@ def insert_student(formData_dict):
 
 @eel.expose
 def insert_customer(formData_dict):
-   return inserting_customer(engine, formData_dict)
+   return inserting_customer_data(engine, formData_dict)
 
 @eel.expose
 def update_customer(formData_dict):
   return update_customer_data(engine, formData_dict)
+
+
 
 #day 4th 16thJuly25
 @eel.expose
