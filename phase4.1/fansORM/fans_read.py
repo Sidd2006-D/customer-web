@@ -29,18 +29,24 @@ print("#Session obj is active")
 
 
 # Reading data-------------------------------------------------------------------------------------------
-result= session.query(TableFans).order_by(TableFans.id).all()
+# result= session.query(TableFans).order_by(TableFans.id).all()
 
-for tableFanObj in result:
-    print('tableFanObj.id:',tableFanObj.id)
-    print('tableFanObj.name:',tableFanObj.name)
-    print('tableFanObj.rate:',tableFanObj.rate)
+# for tableFanObj in result:
+#     print('tableFanObj.id:',tableFanObj.id)
+#     print('tableFanObj.name:',tableFanObj.name)
+#     print('tableFanObj.rate:',tableFanObj.rate)
     
 
 print("#Table with off set")
 # read_offset_query = session.query(TableFans).offset(20).limit(10)
 
 
+
+result = session.query(TableFans).offset(5).limit(10).all()
+for tableFanObj in result:
+    print('tableFanObj.id:', tableFanObj.id)
+    print('tableFanObj.name:', tableFanObj.name)
+    print('tableFanObj.rate:', tableFanObj.rate)
 
 
 
@@ -50,6 +56,6 @@ print("#Table with off set")
 
 
 #Commiting transaction
-session.commit()
+
 
 session.close()

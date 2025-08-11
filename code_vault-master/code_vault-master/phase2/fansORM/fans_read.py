@@ -14,9 +14,9 @@ class TableFans(Base):
     id = Column(Integer,primary_key=True)
     name=Column(String(255))
     rate = Column(Integer)
+    # def _repr_(self):
+    #     return f"<TableFans(id={self.id!r}, name={self.name!r}, rate={self.rate!r})>"
     
-# print('# Create the table (Fans) in the database')
-
 Base.metadata.create_all(engine)
 print("Table(FANS) is created")
 
@@ -28,21 +28,34 @@ session=Session()
 print("#Session obj is active")
 
 
-# Inserting data_______________________________________________________________________________
-namevalue=str(input("Enter FAN brand name:"))
-ratevalue=int(input("Enter Rate of FAN :"))
+# Reading data-------------------------------------------------------------------------------------------
+# result= session.query(TableFans).order_by(TableFans.id).all()
 
-print("inserting data into FAN table!")
+# for tableFanObj in result:
+#     print('tableFanObj.id:',tableFanObj.id)
+#     print('tableFanObj.name:',tableFanObj.name)
+#     print('tableFanObj.rate:',tableFanObj.rate)
+    
 
-inserting_data_query = insert(TableFans).values(name=namevalue,rate=ratevalue)
+print("#Table with off set")
+# read_offset_query = session.query(TableFans).offset(20).limit(10)
 
-# print('# Execute the statement using session.execute()')
-result = session.execute(inserting_data_query)
+
+
+result = session.query(TableFans).offset(5).limit(10).all()
+for tableFanObj in result:
+    print('tableFanObj.id:', tableFanObj.id)
+    print('tableFanObj.name:', tableFanObj.name)
+    print('tableFanObj.rate:', tableFanObj.rate)
+
+
+
+
 # ----------------------------------------------------------------------------------------------------
 
 
 
 #Commiting transaction
-session.commit()
+
 
 session.close()

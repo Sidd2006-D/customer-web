@@ -1,0 +1,160 @@
+<html>
+
+<head>
+  <title>+ Customer</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jq1.11.3.js"></script>
+  <script src="js/logix.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="eel.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- <a class="navbar-brand" href="home.html">Home</a> -->
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="home.html">Home <span class="sr-only"></span></a></li>
+          <li class="active"><a href="customerEntry.html">+ Customer <span class="sr-only"></span></a></li>
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Grid <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="customerGrid.html">Customer Grid</a></li>
+              <li><a href="orderGrid.html">Order Grid</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="studentEntry.html">+ Student</a></li>
+<li><a href="student_grid.html">Student Grid</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="jqueryExercise.html">Jquery Exercise</a></li>
+              <li><a href="test.html">TODO1</a></li>
+              <li><a href="test.html">TODO2</a></li>
+              <li><a href="test.html">TODO3</a></li>
+              <li><a href="test.html">TODO4</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <h2>Customer Information Form</h2>
+  <form class="container" id="customerForm">
+    <input type="hidden" value="" name="customerID" id="customerID">
+    <div class="form-group">
+      <div>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" class="form-control" required>
+      </div>
+      <div>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+      <div>
+        <label for="phone">Phone Number:</label><br>
+        <input type="number" id="phone" name="phone" class="form-control" min="0">
+      </div>
+      <div>
+        <label for="product">Laptop Brand:</label><br>
+        <select class="form-control custom-select" id="product" name="product" required>
+          <option value="" disabled selected>Select a brand</option>
+          <option value="Dell">Dell</option>
+          <option value="HP">HP</option>
+          <option value="Lenovo">Lenovo</option>
+          <option value="Apple">Apple</option>
+          <option value="Asus">Asus</option>
+        </select>
+      </div>
+      <div>
+        <label for="processor">Processor:</label><br>
+        <select class="form-control custom-select" id="processor" name="processor" required>
+          <option value="" disabled selected>Select a processor</option>
+          <option value="i3">Intel Core i3</option>
+          <option value="i5">Intel Core i5</option>
+          <option value="i7">Intel Core i7</option>
+          <option value="i9">Intel Core i9</option>
+          <option value="Ryzen5">AMD Ryzen 5</option>
+          <option value="Ryzen7">AMD Ryzen 7</option>
+        </select>
+      </div>
+
+      <div class="text-right">
+        <button type="reset" class="btn btn-primary" >Clear</button>
+        <button type="button" class="btn btn-success"
+          onclick="saveCustomer()">Submit</button>
+      </div>
+    </div>
+  </form>
+
+
+
+</body>
+<script>
+  $(document).ready(function () {
+    // Get the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Get the value of a specific parameter (e.g., 'paramName')
+    const paramValue = urlParams.get('paramName');
+
+    // Log the retrieved parameter value
+    // console.log(paramValue);
+
+    // You can also iterate through all parameters
+    if (paramValue) {
+
+    }
+    // for (const [key, value] of urlParams) {
+    //   console.log(`${key}: ${value}`);
+    //   if (key == 'rowId') {
+    //     getCustomerByID(value);
+    //   }
+    // }
+  });
+</script>
+
+</html>
+<!-- <style>
+body {
+  background-image: url('img/laptop.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  
+}
+</style> -->
