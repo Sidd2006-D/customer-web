@@ -5,7 +5,7 @@ from sqlalchemy import desc
 
 from database_handler.models import *
 from fans_api.fans import read_all_fans_row, insert_fan_row, delete_fan_stock
-from fans_api.fans import create_update_fan_stock
+from fans_api.fans import create_update_fan_stock,file_read_api
 
 # db_connection_string = 'mysql+pymysql://root:mysql_123@localhost/code_vault'
 db_connection_string = "mysql+pymysql://root:ronaldo@localhost/practice"
@@ -28,6 +28,8 @@ def get_session_obj():
     # return session
 
 
+def file_read_from_db(file):
+    return file_read_api(file)
 def read_fans_from_db(session):
     return read_all_fans_row(session)
 

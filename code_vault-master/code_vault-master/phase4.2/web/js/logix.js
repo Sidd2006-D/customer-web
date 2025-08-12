@@ -23,6 +23,32 @@ Class Object.
 Object Orient Programing in JS
 
 */
+// function file_read(){
+
+// }
+var file;
+function uploadFile() {
+  let files = $("#fileInput")[0].files;
+  if (files.length < 1) {
+    alert("No File selected");
+    return;
+  }
+  alert("File uploaded");
+  file = files[0];
+  sampleFileReader.readAsDataURL(file);
+}
+
+const sampleFileReader = new FileReader();
+sampleFileReader.onload = async function (e) {
+  const fileData = e.target.result; // Base64 encoded file data
+  const fileName = file.name;
+  const fileType = file.type;
+
+  // Call the Python function with the file data and metadata
+  let data = await eel.file_read(fileData, fileName, fileType)();
+  console.log(data);
+};
+
 var fanTRTDButtons =
   '<td><button type="button" onclick="editrow(this)" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Edit</button></td><td><button onclick="deleteFan(this)" type="button" class="btn btn-danger"> Delete</button></td>';
 

@@ -130,3 +130,10 @@ def delete_fan_stock(session, data):
         else:
             print("Fan not found.")
             return "Fan not found."
+
+
+
+
+def file_read_api(file):
+    pass
+    
