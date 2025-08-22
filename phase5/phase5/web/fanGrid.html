@@ -1,0 +1,179 @@
+<html>
+
+  <head>
+    <title>Fan Grid</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jq1.11.3.js"></script>
+    <script src="js/logix.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <a class="active navbar-brand" href=""></a> -->
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="home.html">Home</a></li>
+            <li class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">Master <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="active"><a href="fanGrid.html">Fan Grid</a></li>
+                <li class=""><a href="stockGrid.html">Stock Grid</a></li>
+                <li>
+                  <a href="FileHandling.html">File Handling</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">Work with fan's master</div>
+        <div class="panel-body">
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" onclick="loadFanMasterApi()" class="btn btn-primary">
+              Show All Fans
+            </button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addFanModal">
+              + Fans
+            </button>
+
+          </div>
+           <button onclick="getFanStockDataFromDBThenGenExcelFile()" class="beautibutton">Download FanStock Excel</button>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Fan master</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="masterTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addFanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">+ Fan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="fanName">Name</label>
+              <input type="text" id="fanName" class="form-control" />
+
+              <label for="fanRate">Rate</label>
+              <input type="number" id="fanRate" min="0" class="form-control" />
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <button type="button" onclick="insert_fans()" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- -------------- FAN EDIT MODEL--------------------------------- -->
+
+    <div class="container">
+
+      <!-- Trigger the modal with a button -->
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title"><strong>FAN INFO EDIT</strong></h4>
+            </div>
+            <div class="modal-body">
+              <p>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="fanName">Name</label>
+                  <input type="text" id="editfanName" class="form-control" />
+
+                  <label for="fanRate">Rate</label>
+                  <input type="number" id="editfanRate" min="0" class="form-control" />
+
+                </div>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning">Update</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+  </body>
+
+</html>
+
+<style>
+  .beauti {
+    width: 90;
+    height: 40;
+    background-color: rgb(88, 203, 218);
+    border-radius: 20px;
+    box-shadow: inset;
+  }
+
+  .beauti:hover {
+    cursor: pointer;
+    background-color: rgb(14, 187, 187);
+    border-color: rgb(206, 132, 132);
+  }
+</style>

@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <title>Student Grid</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jq1.11.3.js"></script>
+    <script src="js/logix.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <a class="navbar-brand" href="home.html">Home</a> -->
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="home.html">Home <span class="sr-only"></span></a>
+            </li>
+            <li>
+              <a href="customerEntry.html"
+                >+ Customer <span class="sr-only"></span
+              ></a>
+            </li>
+            <li><a href="#">Link</a></li>
+            <li class="active dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Grid <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="customerGrid.html">Customer Grid</a></li>
+                <li><a href="orderGrid.html">Order Grid</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="studentEntry.html">+ Student</a></li>
+                <li class="active">
+                  <a href="student_grid.html">Student Grid</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href="jqueryExercise.html">Jquery Exercise</a></li>
+                <li><a href="test.html">TODO1</a></li>
+                <li><a href="test.html">TODO2</a></li>
+                <li><a href="test.html">TODO3</a></li>
+                <li><a href="test.html">TODO4</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" />
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Dropdown <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <div id = "loaddata" class="container">
+      <div class="panel">
+        <div class="panel-heading">
+          <button
+            type="button"
+            class="btn btn-info right"
+            onclick="get_student()"
+          >
+            Load Data
+          </button>
+        </div>
+        <div class="panel-body">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><h3>Result</h3></h5>
+              <span id="result_span"></span>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Date_OF_Entry</th>
+                  <th>Name</th>
+                  <th>DOB</th>
+                  <th>Age</th>
+                  <th>Class</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody id="studentGridTableTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Update student -->
+    <form style="display: none" class="container" id="update_studentForm">
+      <h2>Student Edit</h2>
+      <input type="hidden" value="" name="studentID" id="studentID" />
+      <div class="form-group">
+        <div>
+          <label for="name">Name:</label><br />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            required
+          />
+        </div>
+        <div>
+          <label for="dob">DOB:</label><br />
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            class="form-control"
+            required
+          />
+        </div>
+        <div>
+          <label for="class">Class:</label><br />
+          <select
+            class="form-control custom-select"
+            id="class"
+            name="class"
+            required
+          >
+            <option value="" selected>-Select-</option>
+            <option value="10th">10th</option>
+            <option value="12th">12th</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Phd">Phd</option>
+          </select>
+        </div>
+
+        <div class="text-right">
+          <button type="reset" class="btn btn-primary">Clear</button>
+          <button type="button" class="btn btn-success" onclick="editStudent()">
+            Update
+          </button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

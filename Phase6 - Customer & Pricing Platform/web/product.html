@@ -1,0 +1,162 @@
+<html>
+  <head>
+    <title>Product</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jq1.11.3.js"></script>
+    <script src="js/logix.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="home.html">Home</a></li>
+            <li class="active dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Master <span class="caret"> </span
+              ></a>
+              <ul class="dropdown-menu">
+                <li class=""><a href="customer.html">Customer</a></li>
+                <li class="active"><a href="product.html">Product</a></li>
+                <li class=""><a href="price_list.html">Price List</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="form-outer">
+      <form class="container mt-5 product-form" style="max-width: 500px">
+        <div class="card shadow-lg p-4 rounded color-card">
+          <h2 class="text-center mb-4 section-title">Add Product</h2>
+
+          <div class="form-group mb-3">
+            <label for="Pname" class="form-label vibrant-label">Product Name</label>
+            <input
+              type="text"
+              placeholder="Enter product name"
+              name="Pname"
+              id="Pname"
+              class="form-control colorful-input"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="Prate" class="form-label vibrant-label">Rate</label>
+            <input
+              type="number"
+              min="0"
+              id="Prate"
+              class="form-control colorful-input"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="tax" class="form-label vibrant-label">Tax (%)</label>
+            <input
+              type="number"
+              min="0"
+              max="80"
+              name="tax"
+              id="tax"
+              class="form-control colorful-input"
+              required
+            />
+          </div>
+
+          <button
+            type="button"
+            onclick="addProduct()"
+            class="btn btn-gradient btn-lg w-100 mt-2"
+          >
+            <span class="glyphicon glyphicon-barcode"></span> Save Product
+          </button>
+        </div>
+      </form>
+    </section>
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #fcb69f 0%, #f6eec7 100%);
+      }
+      .form-outer {
+        min-height: calc(90vh - 70px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .product-form {
+        margin-top: 38px;
+        margin-bottom: 52px;
+      }
+      .color-card {
+        background: linear-gradient(135deg, #fff 67%, #fcb69f 115%, #a1c4fd 101%);
+        box-shadow: 0 6px 36px 0 rgba(60,107,195,0.10);
+        border-radius: 16px;
+        border: none;
+        transition: box-shadow .2s;
+      }
+      .color-card:hover {
+        box-shadow: 0 16px 48px rgba(189,195,199,0.12);
+      }
+      .section-title {
+        font-weight: 900;
+        letter-spacing: 1px;
+        font-family: 'Segoe UI',Arial,sans-serif;
+        background-image: linear-gradient(90deg, #f7971e, #fcb69f, #2196f3, #fc5c7d);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+      .vibrant-label {
+        color: #ad1457;
+        font-weight: bold;
+        letter-spacing: .5px;
+      }
+      .colorful-input:focus {
+        border-color: #f7971e;
+        box-shadow: 0 0 0 2px #fcb69f8e;
+      }
+      .btn-gradient {
+        background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border: none;
+        box-shadow: 0 2px 8px #feb47b88;
+        transition: background .15s;
+      }
+      .btn-gradient:hover {
+        background: linear-gradient(100deg, #21d4fd 0%, #f7971e 100%);
+        color: #fff;
+      }
+    </style>
+  </body>
+</html>

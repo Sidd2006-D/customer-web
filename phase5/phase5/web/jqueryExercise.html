@@ -1,0 +1,174 @@
+<html>
+
+<head>
+  <title>Jquery Exercise</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/jq1.11.3.js"></script>
+  <script src="js/logix.js"></script>
+  <script src="js/jqueryExercise.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="eel.js"></script>
+</head>
+
+<body>
+  
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- <a class="navbar-brand" href="home.html">Home</a> -->
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li ><a href="home.html">Home <span class="sr-only"></span></a></li> 
+          <li ><a href="customerEntry.html">+ Customer <span class="sr-only"></span></a></li> 
+          <li><a href="#">Link</a></li>
+          <li class="active dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Grid <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li ><a href="customerGrid.html">Customer Grid</a></li>
+              <li><a href="orderGrid.html">Order Grid</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="studentEntry.html">+ Student</a></li>
+<li class="active"><a href="student_grid.html">Student Grid</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="jqueryExercise.html">Jquery Exercise</a></li>
+              <li><a href="test.html">TODO1</a></li>
+              <li><a href="test.html">TODO2</a></li>
+              <li><a href="test.html">TODO3</a></li>
+              <li><a href="test.html">TODO4</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+    <div class="container">
+  <div class="panel"> 
+    <div class="panel-body">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Here we will practive on JS/Jquery/Css
+          </h5>
+        </div>
+      </div>  
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <button type="button" class="beautibutton" onclick="hideAll()">Hide All</button>
+            <button type="button" class="beautibutton" onclick="showAll()">show  All</button>
+            <button type="button" class="beautibutton" onclick="showD1hideD2()">Show D1 & hide D2</button>
+            <button type="button" class="beautibutton" onclick="hideD1ShowD2()">hide D1 & show D2</button>
+            <button type="button" class="beautibutton" onclick="replaceD1Html()">Replace D1 html with Sample</button>
+            <button type="button" class="beautibutton" onclick="appendD1Html()">Append html into D1</button>
+            <button type="button" class="beautibutton" onclick="prependD1Html()">Prepend html into D1</button>
+            <button type="button" class="beautibutton" onclick="toggleD1andD2()">toggle D1 & D2</button>
+                <button type="button" class="beautibutton" onclick="replaceD2Html()">replaceD2Html with sample</button>
+            </div>
+          </div>
+          <div class="row beautibox">
+            <div id="D1" style="display: none;">
+              <h3>This is D1</h3>
+            </div>
+            <div id="D2" style="display: none;">
+              <h3>This is D2</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-12"> 
+        
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="beautibutton" onclick="testCssWithJQ()">.css JQ</button>
+              <button type="button" class="beautibutton" onclick="howLoopWillWorks()">Loop JQ</button>
+            </div> 
+            <div class="col-12"> 
+              <ol id="orderListTest" style="">
+                <li class="li1">Item 1</li>
+                <li class="li1">Item 2Ab</li>
+                <li class="li2">Item A2</li>
+                <li class="li2">Item B2</li>
+                <li class="li3">Item C3</li> 
+              </ol>
+            </div>
+          </div>    
+      </div>  
+      <div class="row">
+        <div class="col-2">
+          <label>1st Number</label>
+          <input type="number" id="firstN">
+        </div>
+        <div class="col-2">
+          <label>2nd Number</label>
+          <input type="number" id="secondN">
+        </div>
+        <div class="col-2">
+          <label>Result</label>
+          <input type="number" id="resultN">
+        </div>
+        <div class="col-12">
+          <button type="button" onclick="addNumber()">Add(+) Num</button>
+          <button type="button" onclick="addNumber()">Sub(-) Num</button>
+          <button type="button" onclick="addNumber()">Div(/) Num</button>
+          <button type="button" onclick="addNumber()">(*) Num</button>
+        </div>
+      </div>
+
+      
+
+      <div class="table-responsive">
+        <table class="table table-bordered" id="table1">
+          <thead>
+            <tr>
+              <th>H1</th>
+              <th>H2</th> 
+            </tr>
+            
+          </thead>
+          <tbody id="table1Tbody">
+
+          </tbody>   
+        </table>
+
+      </div> 
+    </div>
+  </div>
+
+  </div>
+    </p>
+</body>
+</html>

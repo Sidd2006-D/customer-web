@@ -1,0 +1,99 @@
+
+
+.left {
+  float: left !important;
+}
+
+.right {
+  float: right !important;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.mt-35 {
+  margin-top: 35px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.ml-5{
+  margin-left: 5px; 
+}
+.ml-10{
+  margin-left: 10px; 
+}
+.ml-15{
+  margin-left: 15px; 
+}
+.ml-20{
+  margin-left: 20px; 
+}
+.ml-25{
+  margin-left: 25px; 
+}
+/*
+.room-box{
+  // full width 
+  border,
+  padding
+  margin
+}
+*/
+
+.beautibox {
+  background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(33, 147, 176, 0.15);
+  padding: 24px 32px;
+  margin: 20px 0;
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 1.1rem;
+  transition: box-shadow 0.3s;
+}
+.attractive-box:hover {
+  box-shadow: 0 8px 32px rgba(33, 147, 176, 0.25);
+}
+
+.beautibutton {
+  background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;ne;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(33, 147, 176, 0.15);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.beautibutton:hover {
+  background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+  box-shadow: 0 4px 16px rgba(33, 147, 176, 0.25);
+}
+
+
+.li1{
+  font-size: 15px;
+}
+
+.li2{
+  font-size: 25px;
+}
+
+.li3{
+  font-size: 30px; font-weight: bold;
+} 

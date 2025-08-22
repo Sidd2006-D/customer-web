@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <title>Customer</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jq1.11.3.js"></script>
+    <script src="js/logix.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+  <script>
+    $(document).ready(function () {
+      loadBasepriceScreenData();
+    });
+  </script>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="home.html">Home</a></li>
+            <li class="dropdown active">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Master <span class="caret"> </span
+              ></a>
+              <ul class="dropdown-menu">
+                <li class="active"><a href="customer.html">Customer</a></li>
+                <li class=""><a href="product.html">Product</a></li>
+                <li class=""><a href="price_list.html">Price List</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="form-outer">
+      <form class="container mt-5 customer-form" style="max-width: 500px">
+        <div class="card shadow-lg p-4 rounded rainbow-card">
+          <!-- <button type="button" onclick="loadBasepriceScreenData()" class="btn btn-sm btn-gradient mb-3 pull-right">Load Dropdown Masters</button> -->
+          <h2 class="text-center mb-4 section-title">Add Customer</h2>
+
+          <div class="form-group mb-3">
+            <label for="name" class="form-label vibrant-label"
+              >Customer Name</label
+            >
+            <input
+              type="text"
+              placeholder="Enter customer name"
+              name="name"
+              id="name"
+              class="form-control colorful-input"
+              required
+            />
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="base_price" class="form-label vibrant-label"
+              >Base Price</label
+            >
+            <select
+              name="base_price"
+              id="base_price"
+              class="form-control colorful-input"
+              required
+            >
+              <option value="">Select</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            onclick="addCustomer()"
+            class="btn btn-gradient btn-lg w-100 mt-2"
+          >
+            <span class="glyphicon glyphicon-floppy-disk"></span> Save Customer
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #dafbff 0%, #78ffd6 100%);
+      }
+      .form-outer {
+        min-height: calc(90vh - 70px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .customer-form {
+        margin-top: 38px;
+        margin-bottom: 52px;
+      }
+      .rainbow-card {
+        background: linear-gradient(
+          135deg,
+          #ffffff 67%,
+          #ffd700 125%,
+          #12c2e9 101%
+        );
+        box-shadow: 0 6px 36px 0 rgba(0, 60, 130, 0.12);
+        border-radius: 16px;
+        border: none;
+        transition: box-shadow 0.2s;
+      }
+      .rainbow-card:hover {
+        box-shadow: 0 16px 48px rgba(18, 194, 233, 0.18);
+      }
+      .section-title {
+        font-weight: 900;
+        letter-spacing: 1px;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background-image: linear-gradient(
+          90deg,
+          #f7971e,
+          #ffd200,
+          #21d4fd,
+          #b721ff
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+      .vibrant-label {
+        color: #0d47a1;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+      }
+      .colorful-input:focus {
+        border-color: #12c2e9;
+        box-shadow: 0 0 0 2px #dafbff8e;
+      }
+      .btn-gradient {
+        background: linear-gradient(90deg, #1d976c 0%, #21d4fd 100%);
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border: none;
+        box-shadow: 0 2px 8px #76e2ff88;
+        transition: background 0.15s;
+      }
+      .btn-gradient:hover {
+        background: linear-gradient(100deg, #f7971e 0%, #21d4fd 100%);
+        color: #fff;
+      }
+    </style>
+  </body>
+</html>

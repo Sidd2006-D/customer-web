@@ -1,0 +1,175 @@
+<html>
+  <head>
+    <title>Price List</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jq1.11.3.js"></script>
+    <script src="js/logix.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+     <script>$(document).ready(function () {
+  
+  loadBasepriceScreenData();
+  loadProductScreenData();
+});
+</script>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="home.html">Home</a></li>
+            <li class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">Master <span class="caret"> </span></a>
+              <ul class="dropdown-menu">
+                <li class=""><a href="customer.html">Customer</a></li>
+                <li class=""><a href="product.html">Product</a></li>
+                <li class="active"><a href="price_list.html">Price List</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="form-outer">
+      <form class="container mt-5" style="max-width: 500px; display: none;" id="newBPForm">
+        <div class="card shadow-lg p-4 rounded rainbow-card">
+          <h2 class="text-center mb-4 section-title">+ Base Price</h2>
+          <div class="form-group mb-4">
+            <label for="basePriceTitle" class="form-label vibrant-label">*Title</label>
+            <input type="text" value="" name="basePriceTitle" id="basePriceTitle" class="form-control colorful-input" required>
+          </div>
+          <div class="form-group mb-4">
+            <button type="button" class="btn btn-default w-100 pull-left btn-gradient2"
+              onclick="$('#newBPForm,#addPriceForm').toggle()">
+              Cancel
+            </button>
+            <button type=" button" class="btn btn-primary w-100 pull-right btn-gradient" onclick="addBasePrice()">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+      <form class="container mt-5" style="max-width: 500px;" id="addPriceForm">
+        <div class="card shadow-lg p-4 rounded color-card">
+          <!-- <button type="button" onclick="loadBasepriceScreenData(); loadProductScreenData()" class="btn btn-sm btn-gradient2 mb-3 pull-right">Load Dropdown Masters</button> -->
+          <h2 class="text-center mb-4 section-title">Price List</h2>
+          <div class="input-group mb-3">
+            <select name="base_price" id="base_price" class="form-control colorful-input">
+              <option value="">-Base Price-</option>
+            </select>
+            <div class="input-group-addon">
+              <span onclick="$('#newBPForm,#addPriceForm').toggle()" style="cursor:pointer;font-weight:bold;color:#e740e1"> + </span>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <select name="product" id="product" class="form-control colorful-input" required>
+              <option value="">-Product-</option>
+            </select>
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="rate" class="form-label vibrant-label">*Rate</label>
+            <input type="number" min="0" value="" name="rate" id="rate" class="form-control colorful-input" required>
+          </div>
+
+          <button type="button" onclick="addProductPriceListWise()" class="btn btn-gradient btn-lg w-100">
+            <span class="glyphicon glyphicon-tag"></span> Save Price
+          </button>
+        </div>
+      </form>
+    </section>
+    <script>$(document).ready(function () {
+  
+  loadBasepriceScreenData();
+  loadProductScreenData();
+});
+</script>
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f2d6ee 0%, #e0c3fc 100%);
+      }
+      .form-outer {
+        min-height: calc(90vh - 70px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .rainbow-card {
+        background: linear-gradient(135deg, #fff 67%, #e0c3fc 115%, #efd6ee 101%);
+        box-shadow: 0 6px 36px 0 rgba(200,60,140,0.06);
+        border-radius: 16px;
+        border: none;
+        transition: box-shadow .2s;
+      }
+      .rainbow-card:hover {
+        box-shadow: 0 16px 48px rgba(130,60,180,0.09);
+      }
+      .color-card {
+        background: linear-gradient(135deg, #fff 67%, #fcb69f 115%, #c471f5 101%);
+        box-shadow: 0 6px 36px 0 rgba(140,107,210,0.11);
+        border-radius: 16px;
+        border: none;
+        transition: box-shadow .2s;
+      }
+      .color-card:hover {
+        box-shadow: 0 16px 48px rgba(189,195,199,0.13);
+      }
+      .section-title {
+        font-weight: 900;
+        letter-spacing: 1px;
+        font-family: 'Segoe UI',Arial,sans-serif;
+        background-image: linear-gradient(90deg, #fd8eb4, #6a82fb, #a770ef, #fc5c7d);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+      .vibrant-label {
+        color: #6f22b9;
+        font-weight: bold;
+        letter-spacing: .5px;
+      }
+      .colorful-input:focus {
+        border-color: #fd8eb4;
+        box-shadow: 0 0 0 2px #fcb69f8e;
+      }
+      .btn-gradient {
+        background: linear-gradient(90deg, #a770ef 0%, #fd8eb4 100%);
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border: none;
+        box-shadow: 0 2px 8px #d4aaff44;
+        transition: background .15s;
+      }
+      .btn-gradient:hover {
+        background: linear-gradient(100deg, #6a82fb 0%, #fc5c7d 100%);
+        color: #fff;
+      }
+      .btn-gradient2 {
+        background: linear-gradient(70deg, #f7971e 0%, #21d4fd 100%);
+        color: #fff;
+        font-weight: 500;
+        border: none;
+      }
+      .btn-gradient2:hover {
+        background: linear-gradient(100deg, #ffd700 0%, #fd8eb4 100%);
+      }
+    </style>
+  </body>
+</html>

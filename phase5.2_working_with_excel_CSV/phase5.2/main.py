@@ -1,14 +1,12 @@
 import eel
-import csv
-import io
-import base64
+from openpyxl import Workbook 
 from database_handler.db_api import get_session_obj
 from database_handler.db_api import read_fans_from_db
 from database_handler.db_api import insert_fans_into_db
 from database_handler.db_api import update_fan_stock_into_db_add
 from database_handler.db_api import update_fan_stock_into_db_reduce
 from database_handler.db_api import delete_fan_stock_into_db
-from database_handler.db_api import file_read_from_db
+from database_handler.db_api import read_fanStock_from_db
 
 session = None
 
@@ -27,44 +25,49 @@ def main():
         @eel.expose  # expose this function to javascript
         def get_all_fan_data():
             return read_fans_from_db(session)
+        
+        @eel.expose  # expose this function to javascript
+        def gen_excel_and_store_in_dir():
+            #open CMD
+            #pip install openpyxl
+            #from openpyxl import Workbook
+            wb = Workbook()
+            # ws = wb.active
+            # ws['A1'] = "ID"
+            # ws['B1'] = "Name"
+            # ws['A2'] = 1
+            # ws['B2'] = "Fan1"
+            # wb.save('fileFromPy.xlsx')
+            data = read_fans_from_db(session)
+            # data = [{
+            #         "fan_id": obj.id,
+            #         "fan_name": obj.name, 
+            #         "fan_rate": obj.rate, 
+            #     }]
+            wb = Workbook()
+            workbookSheet1 = wb.active
+            header_list=["FanId", "Name", "Price"]
+            workbookSheet1.append(header_list)
+            for d in data:
+              #   {
+              #         "fan_id": obj.id,
+              #         "fan_name": obj.name, 
+              #         "fan_rate": obj.rate, 
+              #     }
+              print(d)
+              workbookSheet1.append([
+                  d["fan_id"],d["fan_name"],d["fan_rate"]
+              ])   
+            wb.save('fanData.xlsx')   
+            return "Excel Generated"
+        
+        @eel.expose
+        def get_all_fanStock_data():
+            return read_fanStock_from_db(session)
 
         @eel.expose
         def inserting_data(fan_dict):
             return insert_fans_into_db(session, fan_dict)
-
-        @eel.expose
-        def file_read(fileData, fileName, fileType):
-            print("file_read")
-            print(fileData, fileName, fileType)
-            # 1. Extract the Base64 encoded string
-            base64_string = fileData.split(",")[1]
-
-            # 2. Decode the Base64 string
-            decoded_bytes = base64.b64decode(base64_string)
-            decoded_string = decoded_bytes.decode(
-                "utf-8"
-            )  # Assuming UTF-8 encoding for CSV
-
-            # 3. Create a file object
-            csv_file_obj = io.StringIO(decoded_string)
-
-            # 4. Parse the CSV data
-            csv_reader = csv.reader(csv_file_obj)
-
-            # Read header
-            header = next(csv_reader)
-            print(f"Header: {header}")                         
-
-            # Read rows
-            allFileDta = []
-            for row in csv_reader:
-                d = {"name": row[0], "price": int(row[1])}
-                # d = {}
-                # for index, h in enumerate(header):
-                #     d[h] = row[index]
-                allFileDta.append(d)
-            print(f"Rows: {allFileDta}")
-            return allFileDta  # file_read_from_db(session, file)
 
         @eel.expose
         def update_fan_stock_add(data):

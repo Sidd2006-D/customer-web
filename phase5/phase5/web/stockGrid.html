@@ -1,0 +1,153 @@
+<html>
+
+  <head>
+    <title>Stock Grid</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jq1.11.3.js"></script>
+    <script src="js/logix.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <a class="active navbar-brand" href=""></a> -->
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="home.html">Home</a></li>
+            <li class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">Master <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class=""><a href="fanGrid.html">Fan</a></li>
+                <li class="active"><a href="stockGrid.html">Stock Grid</a></li>
+                <li>
+                  <a href="FileHandling.html">File Handling</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">Work with fan's master</div>
+        <div class="panel-body">
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" onclick="loadFanStockApi()" class="btn btn-primary">
+              Show All Fans Stocks
+            </button>
+
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateFanStock">
+              Edit fan Stock
+            </button>
+          </div>
+          <button onclick="getFanStockDataFromDBThenGenCSVFile()" class="beautibutton">Download FanStock CSV</button>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Fan master</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Stocks QTY</th>
+              </tr>
+            </thead>
+            <tbody id="masterTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addFanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">+ Fan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="fanName">Name</label>
+              <input type="text" id="fanName" class="form-control" />
+
+              <label for="fanRate">Stocks </label>
+              <input type="number" id="fanStocks" class="form-control" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <button type="button" onclick="insert_fans()" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="updateFanStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Fan Stock</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="fanName">Fan</label>
+              <select id="selectedFan" class="form-control">
+                <option value="">-Select-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="qty">Stock Quantity</label>
+              <input type="number" min="0" id="qty" class="form-control" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" onclick="add_fan_stock()" class="btn btn-primary">
+                Add Stock
+              </button>
+              <button type="button" onclick="reduce_fan_stock()" class="btn btn-danger">
+                Reduce Stock
+              </button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
