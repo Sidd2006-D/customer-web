@@ -1,4 +1,20 @@
 
+.loader-over-lay {
+  display: none;
+  position: fixed;
+  z-index: 1060;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, .8) url('/img/loading.gif') 50% 45%
+    no-repeat;
+}
+
+.loader-over-lay.loading {
+  overflow: hidden;
+  display: block;
+}
 
 .left {
   float: left !important;

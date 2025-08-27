@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <title>+ Order</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jq1.11.3.js"></script>
+    <script src="js/logix.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="home.html">Home</a></li>
+            <li class="dropdown active">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Master <span class="caret"> </span
+              ></a>
+              <ul class="dropdown-menu">
+                <li class=""><a href="customer.html">Customer</a></li>
+                <li class=""><a href="product.html">Product</a></li>
+                <li class=""><a href="price_list.html">Price List</a></li>
+                <li class="active"><a href="order.html">+ Order</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <div class="card shadow-sm rounded-3">
+        <div class="card-body">
+          <!-- Customer Selection -->
+          <div class="mb-3 row">
+            <label for="customer" class="col-sm-2 col-form-label fw-semibold"
+              >Customer</label
+            ><br />
+            <div class="col-sm-" style="padding-left: 14">
+              <select
+                class="form-select form-control"
+                id="customer"
+                onchange="createOrderApi.customerSetter(this)"
+              >
+                <option selected>-Select</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Selection -->
+          <div class="row align-items-end mb-3">
+            <div class="col-md-5">
+              <label for="product" class="form-label fw-semibold"
+                >Product</label
+              >
+              <select
+                class="form-select form-control"
+                id="product"
+                onchange="createOrderApi.productSetter(this)"
+              >
+                <option selected>-Select</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="quantity" class="form-label fw-semibold"
+                >Quantity</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="quantity"
+                value="1"
+              />
+            </div>
+            <div class="col-md-3">
+              <label for="basePrice" class="form-label fw-semibold"
+                >Base Price</label
+              >
+              <select
+                name="base_price"
+                id="base_price"
+                onchange="createOrderApi.basePriceSetter(this)"
+                class="form-control colorful-input"
+                required
+              >
+                <option value="">Select</option>
+              </select>
+            </div>
+            <div class="col-md-2 d-grid">
+              <button
+                style="margin-top: 23"
+                onclick="createOrderApi.addProduct()"
+                class="btn btn-info text-white"
+              >
+                Add Product
+              </button>
+            </div>
+          </div>
+
+          <!-- Table Panel -->
+          <div class="card mt-4">
+            <div class="card-header bg-primary text-white fw-semibold">
+              Product Details
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table
+                  class="table table-bordered table-hover align-middle text-center mb-0"
+                >
+                  <thead class="table-light">
+                    <tr>
+                      <th>Customer</th>
+                      <th>Product</th>
+                      <th>Qty</th>
+                      <th>Price</th>
+                      <th>Tax%</th>
+                      <th>Total</th>
+                      <th>Time and Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="order_grid"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loader-over-lay" id="loader">
+      <div style="top: 50%; position: relative; text-align: center">
+        <h3 id="loader_msg">Please wait</h3>
+      </div>
+    </div>
+    <div class="loader-over-lay loading" id="loadMasterDom">
+      <div style="top: 50%; position: relative; text-align: center">
+        <button
+          type="button"
+          onclick="createOrderApi.loadMasterForCreateNewOrder()"
+        >
+          Load Master
+        </button>
+      </div>
+    </div>
+    <script src="js/createOrderApi.js"></script>
+    <script>
+      $(document).ready(function () {
+        //createOrderApi.loadMasterForCreateNewOrder();
+      });
+    </script>
+  </body>
+</html>

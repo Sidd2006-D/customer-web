@@ -1,5 +1,6 @@
 from sqlalchemy import ForeignKey
-from sqlalchemy import Column, Integer, Float, String
+from datetime import datetime
+from sqlalchemy import Column, Integer, Float, String,DateTime
 from sqlalchemy.orm import declarative_base, relationship
 
 
@@ -31,3 +32,19 @@ class ProductWisePriceModel(DBBaseHandler):
     price_list_id = Column(Integer, ForeignKey("price_list.id"))
     product_id = Column(Integer, ForeignKey("product.id")) 
      
+     
+class OrderModel(DBBaseHandler):
+    __tablename__ = "orders"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+    # fields from your order.html
+    customer = Column(String(100), nullable=False)
+    product = Column(String(100), nullable=False)
+    qty = Column(Integer, nullable=False)
+    
+    price = Column(Float, nullable=False)
+    total = Column(Float, nullable=False)
+    base_price = Column(String(255))
+    # auto time & date
+    created_at = Column(DateTime, default=datetime.now) 
