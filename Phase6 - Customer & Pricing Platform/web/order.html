@@ -1,4 +1,5 @@
 <html>
+
   <head>
     <title>+ Order</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
@@ -7,19 +8,102 @@
     <script src="js/logix.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="eel.js"></script>
+    <style>
+      body {
+        background: #f6f8fb;
+      }
+
+      .card {
+        border: none;
+        box-shadow: 0 4px 12px rgba(100, 100, 100, 0.12);
+        border-radius: 16px;
+      }
+
+      .card-header {
+        background: #1976d2 !important;
+        color: #fff !important;
+        border-radius: 12px 12px 0 0;
+        font-size: 20px;
+        letter-spacing: 1px;
+      }
+
+      .form-label,
+      .fw-semibold {
+        font-weight: 600 !important;
+      }
+
+      .form-select,
+      .form-control,
+      .input-group-text {
+        border-radius: 6px;
+        box-shadow: none;
+      }
+
+      .btn-success,
+      .btn-info {
+        border-radius: 8px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+      }
+
+      .btn-info {
+        background-color: #0288d1;
+        border: none;
+      }
+
+      .btn-info.text-white:hover {
+        background-color: #01579b;
+      }
+
+      .btn-success:focus,
+      .btn-info:focus {
+        outline: none;
+        box-shadow: 0 2px 8px rgba(25, 118, 210, 0.18);
+      }
+
+      .table {
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .table th {
+        background: #f3f6fa;
+        font-weight: 700;
+        color: #1976d2;
+        letter-spacing: 1px;
+        font-size: 16px;
+      }
+
+      .table td {
+        background: #fff;
+        font-size: 15px;
+        color: #555;
+      }
+
+      .loader-over-lay {
+        background: rgba(255, 255, 255, 0.8);
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 3999;
+        display: none;
+      }
+
+      .loader-over-lay.active {
+        display: block;
+      }
+    </style>
   </head>
 
   <body>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1"
-            aria-expanded="false"
-          >
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -30,15 +114,8 @@
           <ul class="nav navbar-nav">
             <li class=""><a href="home.html">Home</a></li>
             <li class="dropdown active">
-              <a
-                href="#"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-haspopup="true"
-                aria-expanded="false"
-                >Master <span class="caret"> </span
-              ></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">Master <span class="caret"> </span></a>
               <ul class="dropdown-menu">
                 <li class=""><a href="customer.html">Customer</a></li>
                 <li class=""><a href="product.html">Product</a></li>
@@ -46,129 +123,109 @@
                 <li class="active"><a href="order.html">+ Order</a></li>
               </ul>
             </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Report <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="order_grid.html">Order Grid</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container mt-4">
-      <div class="card shadow-sm rounded-3">
+    <div class="container mt-4 mb-4">
+      <div class="card shadow-sm p-4">
         <div class="card-body">
           <!-- Customer Selection -->
-          <div class="mb-3 row">
-            <label for="customer" class="col-sm-2 col-form-label fw-semibold"
-              >Customer</label
-            ><br />
-            <div class="col-sm-" style="padding-left: 14">
-              <select
-                class="form-select form-control"
-                id="customer"
-                onchange="createOrderApi.customerSetter(this)"
-              >
+          <div class="row align-items-center mb-4">
+            <div class="col-lg-8 col-md-7">
+              <label for="customer" class="form-label">Customer</label>
+              <select class="form-select form-control mb-1" id="customer"
+                onchange="createOrderApi.customerSetter(this)">
                 <option selected>-Select</option>
               </select>
             </div>
           </div>
 
           <!-- Product Selection -->
-          <div class="row align-items-end mb-3">
+          <div class="row align-items-end mb-4 g-2">
             <div class="col-md-5">
-              <label for="product" class="form-label fw-semibold"
-                >Product</label
-              >
-              <select
-                class="form-select form-control"
-                id="product"
-                onchange="createOrderApi.productSetter(this)"
-              >
+              <label for="product" class="form-label">Product</label>
+              <select class="form-select form-control" id="product" onchange="createOrderApi.productSetter(this)">
                 <option selected>-Select</option>
               </select>
             </div>
             <div class="col-md-2">
-              <label for="quantity" class="form-label fw-semibold"
-                >Quantity</label
-              >
-              <input
-                type="number"
-                class="form-control"
-                id="quantity"
-                value="1"
-              />
+              <label for="quantity" class="form-label">Quantity</label>
+              <input type="number" min="1" class="form-control" id="quantity" value="1" />
             </div>
             <div class="col-md-3">
-              <label for="basePrice" class="form-label fw-semibold"
-                >Base Price</label
-              >
-              <select
-                name="base_price"
-                id="base_price"
-                onchange="createOrderApi.basePriceSetter(this)"
-                class="form-control colorful-input"
-                required
-              >
+              <label for="basePrice" class="form-label">Base Price</label>
+              <select name="base_price" id="base_price" onchange="createOrderApi.basePriceSetter(this)"
+                class="form-control" required>
                 <option value="">Select</option>
               </select>
             </div>
-            <div class="col-md-2 d-grid">
-              <button
-                style="margin-top: 23"
-                onclick="createOrderApi.addProduct()"
-                class="btn btn-info text-white"
-              >
-                Add Product
-              </button>
+            <div class="col-md-2">
+              <div class="gap-2" style="margin-top: 26px;">
+                <button onclick="createOrderApi.addProduct()" class="beautibutton mb-15">
+                  <span class="glyphicon glyphicon-plus"></span> Add Product
+                </button>
+              </div>
             </div>
           </div>
 
           <!-- Table Panel -->
-          <div class="card mt-4">
-            <div class="card-header bg-primary text-white fw-semibold">
+          <div class="card mt-4 mb-2">
+            <div class="card-header">
               Product Details
             </div>
             <div class="card-body p-0">
               <div class="table-responsive">
-                <table
-                  class="table table-bordered table-hover align-middle text-center mb-0"
-                >
+                <table class="table table-bordered table-hover align-middle text-center mb-0">
                   <thead class="table-light">
                     <tr>
-                      <th>Customer</th>
                       <th>Product</th>
                       <th>Qty</th>
                       <th>Price</th>
                       <th>Tax%</th>
                       <th>Total</th>
-                      <th>Time and Date</th>
+                      <th>Time & Date</th>
                     </tr>
                   </thead>
                   <tbody id="order_grid"></tbody>
                 </table>
               </div>
+              <div class="col-lg-12">
+                <button type="button" class="savebutton" onclick="createOrderApi.saveOrder()">
+                  Save Order
+                </button>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
-    <div class="loader-over-lay" id="loader">
+    <!-- <div class="loader-over-lay" id="loader">
       <div style="top: 50%; position: relative; text-align: center">
         <h3 id="loader_msg">Please wait</h3>
       </div>
     </div>
     <div class="loader-over-lay loading" id="loadMasterDom">
       <div style="top: 50%; position: relative; text-align: center">
-        <button
-          type="button"
-          onclick="createOrderApi.loadMasterForCreateNewOrder()"
-        >
+        <button type="button" onclick="createOrderApi.loadMasterForCreateNewOrder()">
           Load Master
         </button>
       </div>
-    </div>
+    </div> -->
     <script src="js/createOrderApi.js"></script>
     <script>
       $(document).ready(function () {
-        //createOrderApi.loadMasterForCreateNewOrder();
+        createOrderApi.loadMasterForCreateNewOrder();
       });
     </script>
   </body>
+
 </html>

@@ -1,6 +1,7 @@
 import eel
 from openpyxl import Workbook
 from database_handler.db_api import get_session_obj
+from database_handler import reports
 from masters import master_data_api
 
 session = None
@@ -48,6 +49,19 @@ def main():
         @eel.expose
         def load_customer_screen_data():
             return master_data_api.get_customer_data(session)
+        
+        @eel.expose
+        def create_new_order(data):
+         return master_data_api.create_new_order_with_line_items(session, data)
+        
+        @eel.expose
+        def load_order_grid_all_rows():
+         return reports.fetch_all_orders_row(session)
+       
+        @eel.expose
+        def get_order_details_by_id(order_id):
+         return reports.get_order_details_by_id(session, order_id)
+    
 
         @eel.expose
         def load_master_for_order_cretaion():

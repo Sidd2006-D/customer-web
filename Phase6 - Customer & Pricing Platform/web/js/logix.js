@@ -1,23 +1,23 @@
 async function addProduct() {
   //product.html
   let Pname = $("#Pname").val(),
-    Prate = $("#Prate").val(),
+    // Prate = $("#Prate").val(), // Removed: no rate in ProductModel
     tax = $("#tax").val();
   if (!Pname) {
     alert("Product name should not be blank!");
     return;
   }
-  if (!Prate) {
-    alert("Rate should not be blank!");
-    return;
-  }
+  // if (!Prate) {
+  //   alert("Rate should not be blank!");
+  //   return;
+  // }
   if (!tax) {
     alert("Tax should not be blank!");
     return;
   }
   let data = {
     name: Pname,
-    rate: Prate,
+    // rate: Prate, // Removed: no rate in ProductModel
     tax: tax,
   };
   let result = await eel.saving_productInfo(data)();
@@ -28,7 +28,7 @@ async function addProduct() {
     alert("Failed To Add Product😓😭");
   }
   $("#Pname").val("");
-  $("#Prate").val("");
+  // $("#Prate").val(""); // Removed: no rate in ProductModel
   $("#tax").val("");
 }
 
@@ -98,7 +98,7 @@ function addOrder(){
   
 }
 
-async function loadBasepriceScreenData() {
+async function loadBasepriceScreenDataForForm() {
   let result = await eel.load_baseprice_screen_data()();
   console.log(result);
 
@@ -106,12 +106,12 @@ async function loadBasepriceScreenData() {
 
   let bp = result["bp_list"];
   bp.forEach((item) => {
-    basePriceOptions.push(`<option value="${item.name}">${item.name}</option>`);
+    basePriceOptions.push(`<option value="${item.id}">${item.name}</option>`);
   });
 
   $("#base_price").html(basePriceOptions.join(""));
 }
-async function loadProductScreenData() {
+async function loadProductScreenDataForForm() {
   let result = await eel.load_product_screen_data()();
   console.log(result);
 
@@ -119,7 +119,7 @@ async function loadProductScreenData() {
 
 
   result.forEach((item) => {
-    productOptions.push(`<option value="${item.name}">${item.name}</option>`);
+    productOptions.push(`<option value="${item.id}">${item.name}</option>`);
   });
 
   $("#product").html(productOptions.join(""));
@@ -134,5 +134,23 @@ async function loadCustomerScreenData(){
   });
 
   $("#customer").html(customerOptions.join(""))
-  console.log(result)
+
+}
+
+
+function loaderOnOrderGrid(){
+      
+      // Show loader for 0.5 second on page open
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          var ov = document.getElementById('loader-overlay');
+          if(ov){
+            ov.style.transition = 'opacity 0.3s';
+            ov.style.opacity = 0;
+            setTimeout(function(){ ov.style.display = 'none'; }, 300);
+          }
+        }, 500);
+      });
+      loadOrderGridAllrow() ;
+    
 }

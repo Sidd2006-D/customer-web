@@ -9,6 +9,53 @@ def get_customer_data(session):
     return data
 
 
+def create_new_order_with_line_items(session, data):
+    result = {'newOrderid': 0}
+    item_list = data['item_list'] 
+    with session.begin() as session_obj:
+      customer = session_obj.get(CustomerModel, data['customer_id'])
+      items_object_list = []
+      tax_amount=0.0
+      sub_total=0.0
+      grand_total=0.0
+      for d in item_list:
+          item=CustomerOrderItemsModel()
+          item.product_id = d['id']
+          item.product_name = d['name']
+          item.quantity = d['qty']
+          item.rate = d['rate']
+          item.tax_rate = d['tax_rate'] 
+          #Exclusive Tax Cal
+          item_sub_total = item.rate * item.quantity;
+          item.tax_amount = round(item_sub_total * (item.tax_rate / 100), 2)
+          item.line_total = round(item_sub_total + item.tax_amount, 2)
+          items_object_list.append(item)
+          sub_total += item_sub_total
+          tax_amount += item.tax_amount
+          grand_total += item.line_total
+      customer_order=CustomerOrderModel()  
+      customer_order.customer_id = customer.id  
+      customer_order.customer_name = customer.name  
+      customer_order.base_price = data['selectedBasePrice'] 
+      customer_order.product_count = items_object_list.__len__()
+      customer_order.tax_amount = round(tax_amount,2)
+      customer_order.sub_total = round(sub_total,2)
+      customer_order.grand_total = round(grand_total, 2)
+      local_date = datetime.now().date()
+      customer_order.date = local_date
+      customer_order.month = local_date.replace(day=1)
+      session_obj.add(customer_order) 
+      session_obj.flush()
+      newOrderid = customer_order.id
+      result ['newOrderid']=newOrderid
+      for obj in items_object_list:
+        obj.order_id = newOrderid
+      print(items_object_list)  
+      session_obj.bulk_save_objects(items_object_list)
+      session_obj.commit()
+      return result
+
+
 def inserting_product_price_list_wise(session, data):
     result = {}
     obj = ProductWisePriceModel()
@@ -35,7 +82,7 @@ def get_product_data(session):
                 {
                     "id": obj.id,
                     "name": obj.name,
-                    "rate": obj.rate,
+                    # "rate": obj.rate,  # Removed: no longer in ProductModel
                     "taxRate": obj.tax_rate,
                 }
             )
@@ -140,7 +187,7 @@ def inserting_product_info(session, data):
     }
     productObj = ProductModel()
     productObj.name = data["name"].strip().upper()
-    productObj.rate = data["rate"]
+    # productObj.rate = data["rate"]  # Removed: no longer in ProductModel
     productObj.tax_rate = data["tax"]
     with session.begin() as session_obj:
         session_obj.add(productObj)
@@ -148,7 +195,7 @@ def inserting_product_info(session, data):
         result = {
             "newRowId": productObj.id,
             "name": productObj.name,
-            "rate": productObj.rate,
+            # "rate": productObj.rate,  # Removed: no longer in ProductModel
             "tax_rate": productObj.tax_rate,
         }
         session_obj.commit()
