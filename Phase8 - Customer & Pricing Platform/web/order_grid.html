@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Order Grid</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap5.min.js"></script>
+    <script src="js/logix.js"></script>
+    <script type="text/javascript" src="eel.js"></script>
+  </head>
+
+  <body>
+    <!-- Loading overlay -->
+    <div id="loader-overlay"
+      style="display: none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(255,255,255,0.92) url('img/loading.gif') center center no-repeat;background-size:120px 120px;">
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <!-- Brand/Logo (optional) -->
+        <a class="navbar-brand" href="#">Phase8</a>
+
+        <!-- Toggler for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Master
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="masterDropdown">
+                <li><a class="dropdown-item" href="customer.html">Customer</a></li>
+                <li><a class="dropdown-item" href="product.html">Product</a></li>
+                <li><a class="dropdown-item" href="price_list.html">Price List</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="reportsDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Reports
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                <li><a class="dropdown-item active" href="order_grid.html">Order Grid</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="order.html">+ Order</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container" style="width: 100%; padding: 10px;">
+      <div class="card">
+        <div class="card-header">Order Grid Report</div>
+        <div class="card-body p-0">
+          <div class="row">
+            <div class="col-lg-12" style="text-align: right;" id="actionBtnDOM">
+              <button type="button" onclick="loadOrderGridData()" style="float: right; margin-left: 10px;">
+                Step2: Order Grid With Pagination
+              </button>
+              <button type="button" onclick="loadOrderGridAllrow()" style="float: right; margin-left: 10px;">
+                Step1: Load All
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-12" id="orderGridDom">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var orderDataTableObj;
+    </script>
+    <script src="js/orderGrid.js"></script>
+    <script>
+      $(document).ready(function () {
+        //loaderOnOrderGrid(); 
+      });
+    </script>
+  </body>
+
+</html>
+<style>
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eee 0%, #a7bfe8 100%);
+  }
+
+  .card {
+    border: none;
+    box-shadow: 0 4px 12px rgba(100, 100, 100, 0.12);
+    border-radius: 16px;
+  }
+
+  .card-header {
+    background: #1976d2 !important;
+    color: #fff !important;
+    border-radius: 12px 12px 0 0;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .table {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .table th {
+    background: #f3f6fa;
+    font-weight: 700;
+    color: #1976d2;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+
+  .table td {
+    background: #fff;
+    font-size: 15px;
+    color: #555;
+  }
+
+  /* Clickable table row feedback */
+  .clickable-row {
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+
+  .clickable-row:hover {
+    background: #e3f2fd !important;
+    box-shadow: 0 0 6px rgba(33, 147, 176, 0.13);
+  }
+
+  /* Strong clickable hover for table rows */
+  .table.table-hover tbody tr:hover {
+    background: #1976d2 !important;
+    color: #fff !important;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+  }
+
+  .table.table-hover tbody tr:hover td,
+  .table.table-hover tbody tr:hover th {
+    color: #fff !important;
+    background: #1976d2 !important;
+  }
+</style>

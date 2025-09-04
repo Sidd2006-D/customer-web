@@ -1,67 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
-    <title>Phase 6 - Home</title>
+    <title>Phase 8 - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" />
-    <script src="js/jq1.11.3.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap5.min.js"></script>
     <script src="js/logix.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="eel.js"></script>
   </head>
+
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#nav-main"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <span class="navbar-brand nav-text-custom">Phase 6</span>
-        </div>
-        <div class="collapse navbar-collapse" id="nav-main">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="home.html">Home</a></li>
-            <li class="dropdown">
-              <a
-                href="#"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-haspopup="true"
-                aria-expanded="false"
-                >Master <span class="caret"></span
-              ></a>
-              <ul class="dropdown-menu">
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="product.html">Product</a></li>
-                <li><a href="price_list.html">Price List</a></li>
-                <li class=""><a href="order.html">+ Order</a></li>
+        <!-- Brand/Logo (optional) -->
+        <a class="navbar-brand" href="#">Your Brand</a>
+
+        <!-- Toggler for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="masterDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Master
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="masterDropdown">
+                <li><a class="dropdown-item" href="customer.html">Customer</a></li>
+                <li><a class="dropdown-item" href="product.html">Product</a></li>
+                <li><a class="dropdown-item" href="price_list.html">Price List</a></li>
               </ul>
             </li>
-            <li class="dropdown">
-              <a
-                href="#"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-haspopup="true"
-                aria-expanded="false"
-                >Report <span class="caret"></span
-              ></a>
-              <ul class="dropdown-menu">
-                <li><a href="order_grid.html">Order Grid</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Reports
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                <li><a class="dropdown-item" href="order_grid.html">Order Grid</a></li>
               </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="order.html">+ Order</a>
             </li>
           </ul>
         </div>
@@ -84,10 +78,7 @@
           <div class="col-md-4">
             <div class="card feature-card text-center p-4">
               <div class="feature-icon">
-                <span
-                  class="glyphicon glyphicon-user"
-                  aria-hidden="true"
-                ></span>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
               </div>
               <h3>Customer Management</h3>
               <p class="mb-0">
@@ -99,10 +90,7 @@
           <div class="col-md-4">
             <div class="card feature-card text-center p-4">
               <div class="feature-icon">
-                <span
-                  class="glyphicon glyphicon-barcode"
-                  aria-hidden="true"
-                ></span>
+                <span class="glyphicon glyphicon-barcode" aria-hidden="true"></span>
               </div>
               <h3>Product Master</h3>
               <p class="mb-0">
@@ -114,10 +102,7 @@
           <div class="col-md-4">
             <div class="card feature-card text-center p-4">
               <div class="feature-icon">
-                <span
-                  class="glyphicon glyphicon-list-alt"
-                  aria-hidden="true"
-                ></span>
+                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
               </div>
               <h3>Price Lists</h3>
               <p class="mb-0">
@@ -129,22 +114,13 @@
         </div>
         <div class="mt-5">
           <h4>Get Started</h4>
-          <a class="btn btn-warning btn-lg m-2" href="customer.html"
-            >Go to Customers</a
-          >
-          <a class="btn btn-success btn-lg m-2" href="product.html"
-            >Go to Products</a
-          >
-          <a class="btn btn-info btn-lg m-2" href="price_list.html"
-            >Go to Price List</a
-          >
+          <a class="btn btn-warning btn-lg m-2" href="customer.html">Go to Customers</a>
+          <a class="btn btn-success btn-lg m-2" href="product.html">Go to Products</a>
+          <a class="btn btn-info btn-lg m-2" href="price_list.html">Go to Price List</a>
         </div>
       </div>
     </section>
-    <footer
-      class="text-center"
-      style="color: #eee; margin-top: 40px; font-size: 0.95em"
-    >
+    <footer class="text-center" style="color: #eee; margin-top: 40px; font-size: 0.95em">
       <div class="container">
         <p>
           &copy; 2024 Phase 6 Management Platform &mdash; Simplified business
@@ -153,6 +129,7 @@
       </div>
     </footer>
   </body>
+
 </html>
 
 <style>
@@ -160,11 +137,13 @@
     background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
     min-height: 100vh;
   }
+
   .intro-section {
     padding: 60px 0 40px 0;
     color: #fff;
     text-shadow: 1px 1px 8px rgba(60, 73, 117, 0.25);
   }
+
   .feature-card {
     border-radius: 18px;
     box-shadow: 0 5px 24px rgba(22, 42, 107, 0.12);
@@ -174,25 +153,30 @@
     color: #16325c;
     margin-bottom: 30px;
   }
+
   .feature-card:hover {
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 12px 48px rgba(30, 65, 159, 0.17);
   }
+
   .feature-icon {
     font-size: 3em;
     color: #1d72b8;
     margin-bottom: 15px;
   }
+
   .app-title {
     font-family: "Segoe UI", Arial, sans-serif;
     font-size: 3.2em;
     font-weight: 700;
     letter-spacing: -2px;
   }
+
   .lead {
     font-size: 1.25em;
     font-weight: 400;
   }
+
   .nav-text-custom {
     font-weight: bold;
     color: #1a2740 !important;

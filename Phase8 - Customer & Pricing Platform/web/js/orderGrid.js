@@ -2,23 +2,49 @@
 function prepareOrderTr(d) {
   return `<tr id="${d.id}" style="cursor: pointer;"  onclick="viewOrderDetails(this.id)">
   <td style="text-align: right;">${d.id}</td> 
-  <td style="text-align: right;">${d.date}</td> 
+  <td style="text-align: left;">${d.date}</td> 
   <td style="text-align: left;">${d.customer_name}</td> 
   <td style="text-align: left;">${d.base_price}</td> 
-  <td style="text-align: right;">${d.product_count}</td> 
+  <td style="text-align: center;">${d.product_count}</td> 
   <td style="text-align: right;">₹ ${d.sub_total}</td> 
   <td style="text-align: right;">₹ ${d.tax_amount}</td> 
   <td style="text-align: right;">₹   ${d.grand_total}</td> 
   </tr>`;
 }
+async function loadOrderGridData() {
+  //TODO with pagination
+}
 async function loadOrderGridAllrow() {
+  document.getElementById('loader-overlay').style.display = '';
   let result = await eel.load_order_grid_all_rows()();
   console.log(result);
   let trArray = [];
   result.forEach(function (d) {
     trArray.push(prepareOrderTr(d));
   });
-  $("#order_grid_report").html(trArray.join(""));
+  $("#orderGridDom").html(`<table id="orderGrid" class="table table-bordered table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Date</th>
+                  <th style="">Customer</th>
+                  <th style="text-align: left;">Base Price</th>
+                  <th style="text-align: center;">Products Count</th>
+                  <th style="text-align: right;">Sub-Total</th>
+                  <th style="text-align: right;">Tax</th>
+                  <th style="text-align: right;">Total</th>
+                </tr>
+              </thead>
+              <tbody id="orderGridTbody">
+              ${trArray.join("")}
+              </tbody>
+            </table>`);
+  document.getElementById('loader-overlay').style.display = 'none';
+  orderDataTableObj = $('#orderGrid').DataTable({
+    // "pageLength": 12,
+    "paging": false,
+  });
+  $('#actionBtnDOM').remove();
 }
 
 function viewOrderDetails(id) {
@@ -41,7 +67,7 @@ async function loadOrderDetails() {
   $('#customer_name').html(orderDetails.customer_name);
   $('#base_price').html(orderDetails.base_price);
   $('#sub_total').html('₹ ' + orderDetails.sub_total);
-  $('#tax_amount').html( '₹ ' + orderDetails.tax_amount);
+  $('#tax_amount').html('₹ ' + orderDetails.tax_amount);
   $('#grand_total').html('₹ ' + orderDetails.grand_total);
   // "date": obj.date.strftime("%d-%m-%Y"),  
   // "created_on": obj.created_on.strftime("%d-%m-%Y %H:%M:%S"),  
